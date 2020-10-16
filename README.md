@@ -1,1 +1,2 @@
-# Calculator-with-EventHandlers
+HELLO I AM GERALD BANTILAN, FROM ITCCA2
+\\ This is my repo for ITCC-A2 \\ 
