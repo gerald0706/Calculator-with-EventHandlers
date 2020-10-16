@@ -1,0 +1,425 @@
+/**
+	* @bantilan	 ITCC11 B
+	* data oct 5 2020
+	*/
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+class Calculator {
+	private JFrame frame;
+	private	JPanel mainPanel;
+	private JButton one,two,three,four,five,six,seven,eight,nine,zero,Addition,Subtraction,Multiplication,Dividision,Point,Equals,Clear,backspace;
+	private JTextField display;
+	private MyActionListener buttonActionListener;
+	private BackSpaceListener backSpaceListener;
+	private AdditionListener additionListener;
+	private SubtractionListener subtractionListener;
+	private MultiplicationListener multiplicationListener;
+	private DividisionListener divisionListener;
+	private EqualsListener equalsListener;
+	// class for Switch
+	private B1Listener b1Listener;
+	private B2Listener b2Listener;
+	
+	private JRadioButton b1;
+	private JRadioButton b2;
+	private ButtonGroup Switch;
+	
+
+		double firstnum;
+		double secondnum;
+		double result;
+		
+		String operations;
+		String answer;
+
+	
+
+
+	/** constructor **/
+	public Calculator() {
+	
+	frame = new JFrame();
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	frame.setBounds(100,100,250,385);
+	frame.setTitle("CALCULATOR");
+	frame.setResizable(false);
+
+	Font f = new Font("Tahoma",Font.BOLD,14);
+	display = new JTextField();
+	display.setBounds(10,11,215,32);
+	display.setColumns(10);
+	display.setFont(f);		
+	display.setHorizontalAlignment(JTextField.RIGHT);
+	
+
+	
+		// method for Switch
+		
+	// Switch Buttons
+	
+	
+	b1Listener = new B1Listener();
+	b1 = new JRadioButton("ON");
+	b1.setEnabled(false);
+	b1.setEnabled(true);
+	b1.addActionListener(b1Listener);
+	
+	
+	b2Listener = new B2Listener();
+	b2 = new JRadioButton ("OFF");
+	b2.addActionListener(b2Listener);
+	
+	
+	Switch = new ButtonGroup();
+	Switch.add(b1);
+	Switch.add(b2);
+	
+
+	
+	// My NumberButtns
+	buttonActionListener = new MyActionListener();
+	one = new JButton("1");
+	one.setFont(f);
+
+	two = new JButton("2");
+	two.setFont(f);
+	
+	three = new JButton("3");
+	three.setFont(f);
+
+	four = new JButton("4");
+	four.setFont(f);
+
+	five = new JButton("5");
+	five.setFont(f);
+
+	six = new JButton("6");
+	six.setFont(f);
+	
+	seven = new JButton("7");
+	seven.setFont(f);
+
+	eight = new JButton("8");
+	eight.setFont(f);
+
+	nine = new JButton("9");
+	nine.setFont(f);
+	
+	zero = new JButton("0");
+	zero.setFont(f);
+	
+	// MyOperation Buttons
+	additionListener = new AdditionListener();
+	Addition = new JButton("+");
+	Addition.setFont(f);
+	Addition.setBackground(Color.PINK);
+	Addition.addActionListener(additionListener);
+	
+	subtractionListener = new SubtractionListener();
+	Subtraction = new JButton("-");
+	Subtraction.setFont(f);
+	Subtraction.setBackground(Color.PINK);
+	Subtraction.addActionListener(subtractionListener);
+
+	multiplicationListener = new MultiplicationListener();
+	Multiplication = new JButton("*");
+	Multiplication.setFont(f);
+	Multiplication.setBackground(Color.PINK);
+	Multiplication.addActionListener(multiplicationListener);
+	
+	divisionListener = new DividisionListener();
+	Dividision = new JButton("/");
+	Dividision.setFont(f);
+	Dividision.setBackground(Color.PINK);
+	Dividision.addActionListener(divisionListener);
+
+
+
+	// My special buttons
+	Point = new JButton(".");
+	Point.setFont(f);
+
+	equalsListener = new EqualsListener();
+	Equals = new JButton("=");
+	Equals.setFont(f);
+	Equals.setBackground(Color.GRAY);
+	Equals.addActionListener(equalsListener);
+
+	Clear = new JButton("Clear");
+	Clear.setFont(f);
+	Clear.setBackground(Color.GRAY);
+	
+	backSpaceListener = new BackSpaceListener();
+	backspace = new JButton("x");
+	backspace.setFont(f);
+	backspace.setBackground(Color.RED);
+	backspace.addActionListener(backSpaceListener);
+	
+
+	
+	// MyContentPane
+	frame.getContentPane().add(display);
+	frame.getContentPane().add(one);
+	frame.getContentPane().add(two);
+	frame.getContentPane().add(three);
+	frame.getContentPane().add(Addition);
+	frame.getContentPane().add(four);
+	frame.getContentPane().add(five);
+	frame.getContentPane().add(six);
+	frame.getContentPane().add(Subtraction);
+	frame.getContentPane().add(seven);
+	frame.getContentPane().add(eight);
+	frame.getContentPane().add(nine);
+	frame.getContentPane().add(Multiplication);
+	frame.getContentPane().add(Point);
+	frame.getContentPane().add(zero);
+	frame.getContentPane().add(Equals);
+	frame.getContentPane().add(Dividision);
+	frame.getContentPane().add(Clear);
+	frame.getContentPane().add(backspace);
+	frame.getContentPane().add(b1);
+	frame.getContentPane().add(b2);
+	
+
+	
+	// My Locations
+	one.setBounds(10,54,45,45);
+	two.setBounds(66,54,45,45);
+	three.setBounds(122,54,45,45);
+	Addition.setBounds(178,54,45,45);
+	four.setBounds(10,110,45,45);
+	five.setBounds(66,110,45,45);
+	six.setBounds(122,110,45,45);
+	Subtraction.setBounds(178,110,45,45);	
+	seven.setBounds(10,166,45,45);
+	eight.setBounds(66,166,45,45);
+	nine.setBounds(122,166,45,45);
+	Multiplication.setBounds(178,166,45,45);
+	Point.setBounds(10,222,45,45);
+	zero.setBounds(66,222,45,45);
+	Equals.setBounds(122,222,45,45);
+	Dividision.setBounds(178,222,45,45);
+	Clear.setBounds(66,278,100,45);
+	backspace.setBounds(178,278,45,45);
+	b1.setBounds(10,265,45,40);
+	b2.setBounds(10,292,50,45);
+	
+	// MyActionListener
+	display.addActionListener(buttonActionListener);
+	one.addActionListener(buttonActionListener);
+	two.addActionListener(buttonActionListener);
+	three.addActionListener(buttonActionListener);
+	
+	four.addActionListener(buttonActionListener);
+	five.addActionListener(buttonActionListener);
+	six.addActionListener(buttonActionListener);
+	
+	seven.addActionListener(buttonActionListener);
+	eight.addActionListener(buttonActionListener);
+	nine.addActionListener(buttonActionListener);
+	
+	
+	Point.addActionListener(buttonActionListener);
+	zero.addActionListener(buttonActionListener);
+	
+	Clear.addActionListener(buttonActionListener);
+
+	
+
+	
+	mainPanel = new JPanel();
+
+
+	frame.add(mainPanel);
+	}
+	public void show(){
+		frame.setVisible(true);
+	}
+	
+	
+	
+	
+	// For Switch Button
+	public void disable()
+	
+	{
+		display.setEnabled(false);
+		one.setEnabled(false);
+		two.setEnabled(false);
+		three.setEnabled(false);
+		four.setEnabled(false);
+		five.setEnabled(false);
+		six.setEnabled(false);
+		seven.setEnabled(false);
+		eight.setEnabled(false);
+		nine.setEnabled(false);
+		zero.setEnabled(false);
+		Point.setEnabled(false);
+		Equals.setEnabled(false);
+		Addition.setEnabled(false);
+		Subtraction.setEnabled(false);
+		Multiplication.setEnabled(false);
+		Dividision.setEnabled(false);
+		Clear.setEnabled(false);
+		backspace.setEnabled(false);
+	}
+	public void enable()
+	
+	{
+		display.setEnabled(true);
+		one.setEnabled(true);
+		two.setEnabled(true);
+		three.setEnabled(true);
+		four.setEnabled(true);
+		five.setEnabled(true);
+		six.setEnabled(true);
+		seven.setEnabled(true);
+		eight.setEnabled(true);
+		nine.setEnabled(true);
+		zero.setEnabled(true);
+		Point.setEnabled(true);
+		Equals.setEnabled(true);
+		Addition.setEnabled(true);
+		Subtraction.setEnabled(true);
+		Multiplication.setEnabled(true);
+		Dividision.setEnabled(true);
+		Clear.setEnabled(true);
+		backspace.setEnabled(true);
+	}
+	
+	// inner class
+	/**
+	  * implements ActionListener
+	  */	
+	class MyActionListener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			
+			if (e.getActionCommand() == "Clear") {
+				
+				display.setText("");
+			}else{
+			
+				String tmpStr = display.getText();
+				tmpStr = tmpStr + e.getActionCommand();
+			
+				display.setText(tmpStr);	
+			}
+	
+		}
+	
+	}
+	//* BackSpaceActionListener
+	class BackSpaceListener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			
+			String temp = display.getText();
+			int size = temp.length();
+			String tmpStr ="";
+			
+			for(int x = 0;x< size-1; x++) {
+				
+				tmpStr = tmpStr+temp.charAt(x);
+			}
+			display.setText(tmpStr);
+		}
+	}
+
+
+	// My Operation ActionListener
+	
+	class AdditionListener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			firstnum = Double.parseDouble(display.getText());
+			display.setText("");
+			operations = "+";
+		}
+	}
+		
+	class SubtractionListener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			firstnum = Double.parseDouble(display.getText());
+			display.setText("");
+			operations = "-";
+		}
+	}
+	
+	class MultiplicationListener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			firstnum = Double.parseDouble(display.getText());
+			display.setText("");
+			operations = "*";
+		}
+	}
+	
+	class DividisionListener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			firstnum = Double.parseDouble(display.getText());
+			display.setText("");
+			operations = "/";
+		}
+	}
+	
+	class EqualsListener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) 
+		{
+			
+			String answer;
+			secondnum = Double.parseDouble(display.getText());
+			
+			if (operations == "+")	{
+				result = firstnum + secondnum;
+				
+				answer = String.format("%.0f",result);
+				display.setText(answer);
+			}
+		else if (operations == "-") {
+				result = firstnum - secondnum;
+				answer = String.format("%.0f",result);
+				display.setText(answer);
+			}
+		else if (operations == "*") {
+				result = firstnum * secondnum;
+				answer = String.format("%.0f",result);
+				display.setText(answer);
+			}
+		else if (operations == "/") {
+				result = firstnum / secondnum;
+				answer = String.format("%.0f",result);
+				display.setText(answer);
+			}	
+			
+		}
+			
+	}
+	
+		// For Switch ActionListener
+	class B2Listener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			disable();
+		}
+	}
+
+	class B1Listener implements ActionListener {
+		
+		public void actionPerformed(ActionEvent e) {
+			enable();
+		}
+	}
+}
+
+	class Main {	
+		
+	public static void main(String[] args) {
+		Calculator c = new Calculator();
+		c.show();
+	}
+}
